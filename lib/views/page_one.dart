@@ -248,55 +248,61 @@ class DataSearch extends SearchDelegate{
     return ListView.builder(
       itemCount: query.isEmpty ? allNotes.length : filteredNames.length,
       itemBuilder: (context, index) {
-        return Container(
-          margin: const EdgeInsets.all(10),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: allNotes[index].color == 1 ? Colors.orangeAccent : allNotes[index].color == 2 ? Colors.deepPurpleAccent : allNotes[index].color == 3 ? Colors.pinkAccent : Colors.lightBlueAccent,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black,
-                blurRadius: 3.0,
-                spreadRadius: 1.0,
-                offset: Offset(2.0, 2.0), // shadow direction: bottom right
-              )
-            ],
-          ),
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text(
-                  allNotes[index].title!,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+        return InkWell(
+          onTap: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ShowNoteView(note: query.isEmpty ? allNotes[index] : filteredNames[index],)));
+          },
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: query.isEmpty ? allNotes[index].color == 1 ? Colors.orangeAccent : allNotes[index].color == 2 ? Colors.deepPurpleAccent : allNotes[index].color == 3 ? Colors.pinkAccent : Colors.lightBlueAccent : filteredNames[index].color == 1 ? Colors.orangeAccent : filteredNames[index].color == 2 ? Colors.deepPurpleAccent : filteredNames[index].color == 3 ? Colors.pinkAccent : Colors.lightBlueAccent,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 3.0,
+                  spreadRadius: 1.0,
+                  offset: Offset(2.0, 2.0), // shadow direction: bottom right
+                )
+              ],
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    query.isEmpty ? allNotes[index].title! : filteredNames[index].title!,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Text(allNotes[index].note!.replaceAll('\n', '').length > 50 ? allNotes[index].note!.replaceAll('\n', '').substring(0, 50) + '...' : allNotes[index].note!.replaceAll('\n', ''),
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),),
-              ),
-              Container(
-                child: Text(
-                  allNotes[index].date!,
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(0.5),
-                    fontSize: 12,
+                Container(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    query.isEmpty ? allNotes[index].note!.replaceAll('\n', '').length > 50 ? allNotes[index].note!.replaceAll('\n', '').substring(0, 50) + '...' : allNotes[index].note!.replaceAll('\n', '') : filteredNames[index].note!.replaceAll('\n', '').length > 50 ? filteredNames[index].note!.replaceAll('\n', '').substring(0, 50) + '...' : filteredNames[index].note!.replaceAll('\n', ''),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),),
+                ),
+                Container(
+                  child: Text(
+                    query.isEmpty ? allNotes[index].date! : filteredNames[index].date!,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.5),
+                      fontSize: 12,
+                    ),
                   ),
                 ),
-              ),
 
-            ],
+              ],
+            ),
           ),
         );
       },
