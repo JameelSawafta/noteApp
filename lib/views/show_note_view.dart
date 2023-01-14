@@ -17,11 +17,6 @@ class _ShowNoteViewState extends State<ShowNoteView> {
   SqlHelper sqlHelper = SqlHelper();
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController titleController = TextEditingController();
-  TextEditingController noteController = TextEditingController();
-
-
-
 
 
   @override
@@ -47,7 +42,6 @@ class _ShowNoteViewState extends State<ShowNoteView> {
             key: _formKey,
             child: Column(
               children: [
-                // edit title text field
                 TextFormField(
                   initialValue: widget.note.title,
                   cursorColor: Colors.greenAccent,

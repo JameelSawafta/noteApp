@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'views/add_note_view.dart';
 import 'views/page_one.dart';
-import 'views/show_note_view.dart';
 
 
 

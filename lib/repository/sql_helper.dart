@@ -46,13 +46,6 @@ class SqlHelper{
     return noteModel;
   }
 
-  getNoteById(int id) async {
-    var dbClient = await db;
-    List<Map> maps = await dbClient.query('Notes',where: 'id = ?',whereArgs: [id]);
-    List<NoteModel> noteModel = maps.isNotEmpty
-        ? maps.map((e) => NoteModel.fromMap(e)).toList() : [];
-    return noteModel;
-  }
 
   updateData(NoteModel noteModel) async {
     var dbClient = await db;

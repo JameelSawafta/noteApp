@@ -24,9 +24,7 @@ class _PageOneState extends State<PageOne> {
   @override
   void didChangeDependencies() async {
     allNotes = await sqlHelper.getAllNotes();
-    setState(() {
-      print(allNotes);
-    });
+    setState(() {});
     super.didChangeDependencies();
   }
 
@@ -91,7 +89,6 @@ class _PageOneState extends State<PageOne> {
                 ),
               )
                   :
-
               ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 itemCount: allNotes.length,
@@ -243,24 +240,24 @@ class DataSearch extends SearchDelegate{
   @override
   Widget buildSuggestions(BuildContext context) {
 
-    List filteredNames = allNotes.where((element) => element.title!.toLowerCase().startsWith(query.toLowerCase())).toList();
+    List filteredNotes = allNotes.where((element) => element.title!.toLowerCase().startsWith(query.toLowerCase())).toList();
 
     return ListView.builder(
-      itemCount: query.isEmpty ? allNotes.length : filteredNames.length,
+      itemCount: query.isEmpty ? allNotes.length : filteredNotes.length,
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ShowNoteView(note: query.isEmpty ? allNotes[index] : filteredNames[index],)));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ShowNoteView(note: query.isEmpty ? allNotes[index] : filteredNotes[index],)));
           },
           child: Container(
             margin: const EdgeInsets.all(10),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: query.isEmpty ? allNotes[index].color == 1 ? Colors.orangeAccent : allNotes[index].color == 2 ? Colors.deepPurpleAccent : allNotes[index].color == 3 ? Colors.pinkAccent : Colors.lightBlueAccent : filteredNames[index].color == 1 ? Colors.orangeAccent : filteredNames[index].color == 2 ? Colors.deepPurpleAccent : filteredNames[index].color == 3 ? Colors.pinkAccent : Colors.lightBlueAccent,
+              color: query.isEmpty ? allNotes[index].color == 1 ? Colors.orangeAccent : allNotes[index].color == 2 ? Colors.deepPurpleAccent : allNotes[index].color == 3 ? Colors.pinkAccent : Colors.lightBlueAccent : filteredNotes[index].color == 1 ? Colors.orangeAccent : filteredNotes[index].color == 2 ? Colors.deepPurpleAccent : filteredNotes[index].color == 3 ? Colors.pinkAccent : Colors.lightBlueAccent,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black,
+                  color: Colors.black12,
                   blurRadius: 3.0,
                   spreadRadius: 1.0,
                   offset: Offset(2.0, 2.0), // shadow direction: bottom right
@@ -274,7 +271,7 @@ class DataSearch extends SearchDelegate{
                 Container(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Text(
-                    query.isEmpty ? allNotes[index].title! : filteredNames[index].title!,
+                    query.isEmpty ? allNotes[index].title! : filteredNotes[index].title!,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -285,7 +282,7 @@ class DataSearch extends SearchDelegate{
                 Container(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Text(
-                    query.isEmpty ? allNotes[index].note!.replaceAll('\n', '').length > 50 ? allNotes[index].note!.replaceAll('\n', '').substring(0, 50) + '...' : allNotes[index].note!.replaceAll('\n', '') : filteredNames[index].note!.replaceAll('\n', '').length > 50 ? filteredNames[index].note!.replaceAll('\n', '').substring(0, 50) + '...' : filteredNames[index].note!.replaceAll('\n', ''),
+                    query.isEmpty ? allNotes[index].note!.replaceAll('\n', '').length > 50 ? allNotes[index].note!.replaceAll('\n', '').substring(0, 50) + '...' : allNotes[index].note!.replaceAll('\n', '') : filteredNotes[index].note!.replaceAll('\n', '').length > 50 ? filteredNotes[index].note!.replaceAll('\n', '').substring(0, 50) + '...' : filteredNotes[index].note!.replaceAll('\n', ''),
                     style: const TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -293,7 +290,7 @@ class DataSearch extends SearchDelegate{
                 ),
                 Container(
                   child: Text(
-                    query.isEmpty ? allNotes[index].date! : filteredNames[index].date!,
+                    query.isEmpty ? allNotes[index].date! : filteredNotes[index].date!,
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.5),
                       fontSize: 12,
