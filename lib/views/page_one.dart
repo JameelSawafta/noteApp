@@ -58,25 +58,6 @@ class _PageOneState extends State<PageOne> {
       backgroundColor: Color(0xff232420),
       body: Column(
         children: [
-          // Container(
-          //   margin: const EdgeInsets.all(10),
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   decoration: BoxDecoration(
-          //     color: Colors.grey[300],
-          //     borderRadius: BorderRadius.circular(30),
-          //   ),
-          //   child: TextField(
-          //     cursorColor: Colors.greenAccent,
-          //     decoration: const InputDecoration(
-          //       icon: Icon(Icons.search),
-          //       iconColor: Colors.grey,
-          //       hintText: 'Search',
-          //       hintStyle: TextStyle(color: Colors.grey),
-          //       border: InputBorder.none,
-          //
-          //     ),
-          //   ),
-          // ),
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(10),
@@ -165,7 +146,8 @@ class _PageOneState extends State<PageOne> {
                                 ),
                               Container(
                                 child: Text(
-                                  allNotes[index].date!,
+                                  // make date and time in format like 12:00 12/12/2021
+                                  allNotes[index].date!.substring(0, 10) + ' ' + allNotes[index].date!.substring(11, 16),
                                   style: TextStyle(
                                     color: Colors.black.withOpacity(0.5),
                                     fontSize: 12,
