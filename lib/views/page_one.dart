@@ -146,7 +146,6 @@ class _PageOneState extends State<PageOne> {
                                 ),
                               Container(
                                 child: Text(
-                                  // make date and time in format like 12:00 12/12/2021
                                   allNotes[index].date!.substring(0, 10) + ' ' + allNotes[index].date!.substring(11, 16),
                                   style: TextStyle(
                                     color: Colors.black.withOpacity(0.5),
